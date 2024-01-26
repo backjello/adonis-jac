@@ -1,14 +1,22 @@
 {
   "commands": {
-    "example": {
+    "fake:user": {
       "settings": {
         "loadApp": false,
         "stayAlive": false
       },
-      "commandPath": "./commands/Example",
-      "commandName": "example",
-      "description": "questo è un comando di esempio",
-      "args": [],
+      "commandPath": "./commands/MakeUser",
+      "commandName": "fake:user",
+      "description": "",
+      "args": [
+        {
+          "type": "string",
+          "propertyName": "number",
+          "name": "number",
+          "required": true,
+          "description": "numero di utenti da creare"
+        }
+      ],
       "aliases": [],
       "flags": []
     },

@@ -1,3 +1,4 @@
+// https://github.com/backjello/adonis-jac
 
 /*
 |--------------------------------------------------------------------------
@@ -18,5 +19,10 @@
 | import './routes/customer'
 |
 */
-
-// import Route from '@ioc:Adonis/Core/Route';
+import Route from '@ioc:Adonis/Core/Route';
+// Route.post('/users', 'UsersController.store')
+// Route.get('/users', 'UsersController.index')
+Route.group(() => {
+  Route.resource('/', 'UsersController').apiOnly()
+  Route.get('/by-age', 'UsersController.getByAge') // utenti filtrati per età
+}).prefix('users')
