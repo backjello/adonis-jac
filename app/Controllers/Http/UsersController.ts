@@ -22,17 +22,13 @@ export default class UsersController {
   }
 
   public async store({ request }: HttpContextContract) {
-    const name = request.input('name')
     const all = request.all() // tutto il payload
-
-    // password criptata
-    const pw = await Hash.make(all.password)
 
     const user = await User.create({
       name: all.name,
       surname: all.surname,
       email: all.email,
-      password: pw,
+      password: all.password,
       age: all.age
     })
 
