@@ -17,6 +17,8 @@ export default class UsersController {
   public async show({ params }: HttpContextContract) {
     // trovo un singolo utente grazie al suo ID
     const user = await User.find(params.id)
+    await user?.load('posts')
+    // user.posts = [post1, post2, post3, ...]
     console.log(user);
     return user
   }

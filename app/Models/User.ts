@@ -1,6 +1,8 @@
 import Hash from '@ioc:Adonis/Core/Hash';
-import { BaseModel, afterFind, beforeSave, column, computed } from '@ioc:Adonis/Lucid/Orm';
+import { BaseModel, HasMany, afterFind, beforeSave, column, computed, hasMany } from '@ioc:Adonis/Lucid/Orm';
 import { DateTime } from 'luxon';
+import Comment from './Comment';
+import Post from './Post';
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -12,7 +14,8 @@ export default class User extends BaseModel {
   public name: string
 
   @column({ // metto in maiscolo quando serializzo
-    serialize: (value: string) => value.toUpperCase()
+    // serialize: (value: string) => value.toUpperCase(),
+    // columnName:'suername'
   })
   public surname: string
 
@@ -33,6 +36,13 @@ export default class User extends BaseModel {
   // fullname non ha il decoratore column perchè non è un campo nella tabella user
   @computed() // serializzo la proprietà fullname
   public fullname: string
+
+  // un singolo utente ha tanti post
+  @hasMany(() => Post)
+  public posts: HasMany<typeof Post>
+
+  @hasMany(() => Comment)
+  public comments: HasMany<typeof Comment>
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

@@ -1,24 +1,88 @@
 {
   "commands": {
-    "fake:user": {
+    "delete:user": {
       "settings": {
-        "loadApp": false,
+        "loadApp": true,
         "stayAlive": false
       },
-      "commandPath": "./commands/MakeUser",
-      "commandName": "fake:user",
-      "description": "",
-      "args": [
-        {
-          "type": "string",
-          "propertyName": "number",
-          "name": "number",
-          "required": true,
-          "description": "numero di utenti da creare"
-        }
-      ],
+      "commandPath": "./commands/DeleteUser",
+      "commandName": "delete:user",
+      "description": "Cancelliamo tutti gli utenti creati prima della data passata come argomento o un utente passato per id",
+      "args": [],
       "aliases": [],
-      "flags": []
+      "flags": [
+        {
+          "name": "id",
+          "propertyName": "id",
+          "type": "number",
+          "description": "ID dell'utente da cancellare"
+        },
+        {
+          "name": "date",
+          "propertyName": "date",
+          "type": "string",
+          "alias": "d",
+          "description": "Data per la cancellazione degli utenti"
+        }
+      ]
+    },
+    "fake:comments": {
+      "settings": {
+        "loadApp": true,
+        "stayAlive": false
+      },
+      "commandPath": "./commands/FakeComments",
+      "commandName": "fake:comments",
+      "description": "Creo dei commenti casuali",
+      "args": [],
+      "aliases": [],
+      "flags": [
+        {
+          "name": "number",
+          "propertyName": "number",
+          "type": "number"
+        }
+      ]
+    },
+    "fake:posts": {
+      "settings": {
+        "loadApp": true,
+        "stayAlive": false
+      },
+      "commandPath": "./commands/FakePosts",
+      "commandName": "fake:posts",
+      "description": "Creiamo un post fittizio",
+      "args": [],
+      "aliases": [],
+      "flags": [
+        {
+          "name": "number",
+          "propertyName": "number",
+          "type": "number",
+          "description": "Indica il numero di post da creare",
+          "alias": "n"
+        }
+      ]
+    },
+    "fake:users": {
+      "settings": {
+        "loadApp": true,
+        "stayAlive": false
+      },
+      "commandPath": "./commands/FakeUsers",
+      "commandName": "fake:users",
+      "description": "Genero X utenti casuali",
+      "args": [],
+      "aliases": [],
+      "flags": [
+        {
+          "name": "number",
+          "propertyName": "number",
+          "type": "number",
+          "alias": "n",
+          "description": "numeri di utenti da creare"
+        }
+      ]
     },
     "dump:rcfile": {
       "settings": {},
