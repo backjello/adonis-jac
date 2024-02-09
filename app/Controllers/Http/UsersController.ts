@@ -1,6 +1,10 @@
+import Mail from '@ioc:Adonis/Addons/Mail';
 import Hash from '@ioc:Adonis/Core/Hash';
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 import User from 'App/Models/User';
+import VerificationCode from 'App/Models/VerificationCode';
+import { randomstring } from 'App/lib/utils';
+import mail from 'Config/mail';
 
 export default class UsersController {
 
@@ -32,6 +36,26 @@ export default class UsersController {
       email: all.email,
       password: all.password,
       age: all.age
+    })
+
+    const code = await VerificationCode.create({
+      userId: user.id,
+      code: randomstring(6)
+    })
+
+    await Mail.send((message) => {
+
+      message
+        .to(user.email, user.name)
+        .from('testjac64@gmail.com', 'no-reply')
+        .replyTo('assistenza-clienti@dominio.it', 'Assistenza Clienti')
+        .subject('Verifica la tua email')
+        .htmlView('email/verification', {
+          code: code.code, // il codice di verifica
+          name: user.name
+        })
+
+
     })
 
     return user

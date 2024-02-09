@@ -39,3 +39,6 @@ Route.group(() => {
 
 Route.post('login-with-google', 'AuthController.loginGoogle')
 Route.post('login', 'AuthController.login')
+Route.post('verify-email', 'AuthController.verifyEmail')
+Route.post('send-verification-code', 'AuthController.sendVerificationCode')
+

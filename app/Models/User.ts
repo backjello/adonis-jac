@@ -30,6 +30,11 @@ export default class User extends BaseModel {
   @column()
   public age: number
 
+  @column({
+    serializeAs: null
+  }) // se la mail è verificata o no
+  public emailVerified: boolean
+
   @column() // se l'utente è bloccato o no
   public blocked: boolean
 
