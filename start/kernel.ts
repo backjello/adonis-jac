@@ -41,5 +41,6 @@ Server.middleware.register([
 |
 */
 Server.middleware.registerNamed({
-  log: () => import('App/Middleware/Logrequest')
+  log: () => import('App/Middleware/Logrequest'),
+  auth: () => import('App/Middleware/Auth')
 })

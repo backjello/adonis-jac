@@ -33,6 +33,9 @@ Route.group(() => {
   Route.resource('/posts', 'PostsController').apiOnly()
   Route.resource('/comments', 'CommentsController').apiOnly()
 
-  Route.post('login', 'AuthController.login')
+  Route.get('logout', 'AuthController.logout')
 
-}).middleware('log')
+}).middleware('auth')
+
+Route.post('login-with-google', 'AuthController.loginGoogle')
+Route.post('login', 'AuthController.login')
