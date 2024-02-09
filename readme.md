@@ -1,3 +1,3 @@
 # https://github.com/backjello/adonis-jac
 
-meet https://meet.google.com/czz-upan-wxo
+meet https://meet.google.com/kjo-axrz-xpq
