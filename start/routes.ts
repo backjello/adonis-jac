@@ -21,11 +21,18 @@
 */
 import Route from '@ioc:Adonis/Core/Route';
 
-Route.group(() => {
-  Route.get('/by-age', 'UsersController.getByAge') // utenti filtrati per età
-}).prefix('users')
-Route.resource('users', 'UsersController').apiOnly()
 
-Route.get('/posts/create-fake', 'PostsController.createFake')
-Route.resource('/posts', 'PostsController').apiOnly()
-Route.resource('/comments', 'CommentsController').apiOnly()
+Route.group(() => {
+
+  Route.group(() => {
+    Route.get('/by-age', 'UsersController.getByAge') // utenti filtrati per età
+  }).prefix('users')
+  Route.resource('users', 'UsersController').apiOnly()
+
+  Route.get('/posts/create-fake', 'PostsController.createFake')
+  Route.resource('/posts', 'PostsController').apiOnly()
+  Route.resource('/comments', 'CommentsController').apiOnly()
+
+  Route.post('login', 'AuthController.login')
+
+}).middleware('log')
