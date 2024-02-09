@@ -35,8 +35,8 @@ export default class FakeUsers extends BaseCommand {
   }
 
   public async run() {
-    const { default: userFactory } = await import('./../database/factories/UserFactory')
-    const { default: User } = await import('./../app/Models/User')
+    const { default: userFactory } = await import('Database/factories/UserFactory')
+    const { default: User } = await import('App/Models/User')
 
     const fakeUsers = await userFactory.createMany(this.number)
     await User.createMany(fakeUsers)

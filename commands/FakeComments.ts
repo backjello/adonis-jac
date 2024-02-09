@@ -35,12 +35,13 @@ export default class FakeComments extends BaseCommand {
   }
 
   public async run() {
-    const { default: commentFactory } = await import('../database/factories/CommentFactory')
-    const { default: Comment } = await import('../app/Models/Comment')
+    const { default: commentFactory } = await import('Database/factories/CommentFactory')
+    const { default: Comment } = await import('App/Models/Comment')
+    const { default: Database } = await import('@ioc:Adonis/Lucid/Database')
 
     const commentsFake = await commentFactory.makeMany(this.number)
     await Comment.createMany(commentsFake)
 
-
+    await Database.query().from('users').select('*').debug(true)
   }
 }

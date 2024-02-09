@@ -36,8 +36,8 @@ export default class FakePosts extends BaseCommand {
 
   public async run() {
     this.logger.info('Creo ' + this.number + ' post')
-    const { default: postFactory } = await import('./../database/factories/PostFactory')
-    const { default: Post } = await import('./../app/Models/Post')
+    const { default: postFactory } = await import('Database/factories/PostFactory')
+    const { default: Post } = await import('App/Models/Post')
     const postsFake = await postFactory.makeMany(this.number)
     console.log(postsFake);
 
