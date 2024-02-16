@@ -65,4 +65,5 @@ Route.get('pdf-example', async () => {
 
 })
 
-
+Route.get('order-pdf', 'OrdersController.pdf')
+Route.get('make-order-pdf', 'OrdersController.pdfMake')

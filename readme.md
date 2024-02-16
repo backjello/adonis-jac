@@ -1,3 +1,3 @@
 # https://github.com/backjello/adonis-jac
 
-meet https://meet.google.com/tys-hziq-awn
+meet https://meet.google.com/dkp-pgyh-sku
