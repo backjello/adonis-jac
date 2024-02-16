@@ -1,0 +1,32 @@
+<script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
+
+<script>
+  const socket = io("ws://localhost:3000", {});
+
+
+  function sendMsg() {
+    const textArea = document.getElementById('textarea')
+    const msg = textArea.value
+    socket.emit('message/send', msg)
+    textArea.value = ''
+  }
+
+  socket.on('message/recive', (data) => {
+    const chat = document.getElementById('chat')
+    chat.innerHTML += `
+      <div>
+        <b>${data.name}</b>:
+        <span>${data.message}</span>
+      </div>
+    `
+  })
+</script>
+
+
+<div id="chat">
+
+</div>
+
+<textarea id="textarea" cols="40" rows="10"></textarea>
+<br>
+<button onclick="sendMsg()">Invia</button>
