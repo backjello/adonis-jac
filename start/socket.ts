@@ -20,6 +20,7 @@ const io = new Server(server, {
 
 io.on('connection', (socket) => { //quando si collega un client
   socket.data.name = faker.person.fullName()
+  io.emit('new/user', socket.data.name) // emetto un evento per gli utenti che si connettono
   socket.on('message/send', (data) => { // ascolto l'evento 'message/send'
     io.emit('message/recive', { // il server manda il messaggio a tutti i client connessi
       name: socket.data.name,
@@ -27,6 +28,9 @@ io.on('connection', (socket) => { //quando si collega un client
     })
   })
 
+  socket.on('disconnect', () => { // quando un client si disconnette
+    io.emit('leave/user', socket.data.name)
+  })
 
 })
 

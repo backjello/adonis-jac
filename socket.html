@@ -2,7 +2,7 @@
 
 <script>
   const socket = io("ws://localhost:3000", {});
-
+  const users = []
 
   function sendMsg() {
     const textArea = document.getElementById('textarea')
@@ -10,6 +10,21 @@
     socket.emit('message/send', msg)
     textArea.value = ''
   }
+
+  // evento per i nuovi utenti connessi
+  socket.on('new/user', (name) => {
+    console.log(name);
+    users.push(name)
+    const userList = document.getElementById('users-list')
+    userList.innerHTML = ''
+    users.forEach((user) => {
+      userList.innerHTML += `
+       <li>
+        ${user}
+        </li>
+      `
+    })
+  })
 
   socket.on('message/recive', (data) => {
     const chat = document.getElementById('chat')
@@ -30,3 +45,6 @@
 <textarea id="textarea" cols="40" rows="10"></textarea>
 <br>
 <button onclick="sendMsg()">Invia</button>
+<ul id="users-list">
+
+</ul>
