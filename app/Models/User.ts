@@ -38,6 +38,9 @@ export default class User extends BaseModel {
   @column() // se l'utente è bloccato o no
   public blocked: boolean
 
+  @column() // immagine profilo dell'utente
+  public picture: string
+
   // fullname non ha il decoratore column perchè non è un campo nella tabella user
   @computed() // serializzo la proprietà fullname
   public fullname: string

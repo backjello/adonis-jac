@@ -72,6 +72,19 @@ export default class UsersController {
 
     const data = request.except(['id', 'update_at', 'created_at'])
 
+    const picture = request.file('picture', {
+      extnames: ['png', 'jpeg', 'jpg', 'webp', 'tiff'],
+      size: '2mb'
+    })
+
+    if (picture?.isValid) {
+      await picture.moveToDisk('./')
+      if (picture.fileName && picture.tmpPath) {
+        const url = picture.tmpPath + picture.fileName
+        data.picture = url
+      }
+    }
+
     user.merge(data) // sovrascrivo i dati con quelli nuovi
 
     await user.save() // salvo l'utente con i dati aggiornati nel DB

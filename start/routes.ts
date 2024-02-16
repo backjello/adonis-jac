@@ -1,3 +1,4 @@
+import puppeteer from 'puppeteer';
 // https://github.com/backjello/adonis-jac
 
 /*
@@ -41,4 +42,27 @@ Route.post('login-with-google', 'AuthController.loginGoogle')
 Route.post('login', 'AuthController.login')
 Route.post('verify-email', 'AuthController.verifyEmail')
 Route.post('send-verification-code', 'AuthController.sendVerificationCode')
+
+// genero pdf
+Route.get('pdf-example', async () => {
+  const browser = await puppeteer.launch() // avvio un instanza del browser
+  const page = await browser.newPage() // apro una nuova pagina web
+  await page.emulateMediaType('screen') // emulo il media type
+  await page.goto('http://www.google.it', { // vado alla pagina che voglio stampare
+    waitUntil: 'networkidle0' // carico css, js, img ecc
+  })
+
+  await page.pdf({ //salvo in pdf
+    path: 'tmp/esempio.pdf', // nome e percorso del file
+    format: 'A4', // formato
+    margin: {
+      top: '30px',
+      bottom: '30px'
+    }
+  })
+
+  await browser.close() // chiudo l'instanza del browser
+
+})
+
 
